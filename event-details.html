@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details - NCW Event Organizer</title>
+    <link rel="stylesheet" href="styles/event-details.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/logo2.jpg" alt="Event Logo">
+            <span>NCW Event Organizer</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> Events Calendar</a></li>
+            <li><a href="event-details.html"><i class="fas fa-info-circle"></i> Event Details</a></li>
+        </ul>
+    </nav>
+
+    <div class="event-details-container" id="event-details-container">
+        <!-- Event details will be loaded here -->
+    </div>
+
+    <script>
+        // Get the event parameter from the URL query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventId = urlParams.get('event');
+        
+        // Define event details
+        const events = {
+            'tech-fest-2025': {
+                title: 'Tech Fest 2025',
+                date: 'March 1, 2025 - 9:00 AM',
+                venue: 'NCW Auditorium',
+                competitions: 'Group and Individual',
+                prizes: '$500 for First Place, $300 for Second Place',
+                organizers: 'John Doe, Jane Smith',
+                images: ['event1.jpg', 'event2.jpg']
+            },
+            'hackathon-challenge': {
+                title: 'Hackathon Challenge',
+                date: 'April 10, 2025 - 10:00 AM',
+                venue: 'NCW Tech Lab',
+                competitions: 'Team-Based Coding Challenge',
+                prizes: '$1000 for First Place, $500 for Second Place',
+                organizers: 'David Brown, Lisa Green',
+                images: ['hackathon1.jpg', 'hackathon2.jpg']
+            },
+            'cultural-night': {
+                title: 'Cultural Night',
+                date: 'March 15, 2025 - 6:00 PM',
+                venue: 'NCW Hall',
+                competitions: 'Music, Dance, Art',
+                prizes: '$300 for First Place, $200 for Second Place',
+                organizers: 'Alice Brown, Mike Wilson',
+                images: ['event3.jpg', 'event4.jpg']
+            },
+            'dance-competition': {
+                title: 'Dance Competition',
+                date: 'March 20, 2025 - 10:00 AM',
+                venue: 'NCW Dance Studio',
+                competitions: 'Solo and Group',
+                prizes: '$400 for First Place, $250 for Second Place',
+                organizers: 'Sarah Lee, Robert Green',
+                images: ['event5.jpg', 'event6.jpg']
+            },
+            'singing-contest': {
+                title: 'Singing Contest',
+                date: 'March 25, 2025 - 2:00 PM',
+                venue: 'NCW Auditorium',
+                competitions: 'Solo Singing',
+                prizes: '$500 for First Place, $300 for Second Place',
+                organizers: 'Emma White, Chris Adams',
+                images: ['event7.jpg', 'event8.jpg']
+            },
+            'sports-day': {
+                title: 'Sports Day',
+                date: 'April 5, 2025 - 8:00 AM',
+                venue: 'NCW Sports Ground',
+                competitions: 'Track and Field, Basketball, Football',
+                prizes: 'Trophies and Medals',
+                organizers: 'Mark Stone, Linda Black',
+                images: ['event9.jpg', 'event10.jpg']
+            },
+            'science-expo-2025': {
+                title: 'Science Expo 2025',
+                date: 'April 12, 2025 - 10:00 AM',
+                venue: 'NCW Exhibition Hall',
+                competitions: 'Innovation Showcase, Poster Presentation',
+                prizes: '$700 for First Place, $400 for Second Place',
+                organizers: 'Dr. Helen Carter, James Robinson',
+                images: ['science1.jpg', 'science2.jpg']
+            },
+            'photography-contest': {
+                title: 'Photography Contest',
+                date: 'April 20, 2025 - 2:00 PM',
+                venue: 'NCW Art Center',
+                competitions: 'Best Nature Shot, Portrait, Abstract',
+                prizes: '$600 for First Place, $350 for Second Place',
+                organizers: 'Jessica Miller, Thomas Scott',
+                images: ['photo1.jpg', 'photo2.jpg']
+            }
+        };
+
+        // Get the event details based on the eventId
+        const event = events[eventId];
+
+        // Check if the event exists and display the details
+        if (event) {
+            const eventDetailsContainer = document.getElementById('event-details-container');
+            eventDetailsContainer.innerHTML = `
+                <h2>${event.title}</h2>
+                <div class="event-info">
+                    <p><strong>Date:</strong> ${event.date}</p>
+                    <p><strong>Venue:</strong> ${event.venue}</p>
+                    <p><strong>Competitions:</strong> ${event.competitions}</p>
+                    <p><strong>Prizes:</strong> ${event.prizes}</p>
+                    <p><strong>Organizers:</strong> ${event.organizers}</p>
+                </div>
+                <div class="event-images">
+                    ${event.images.map(image => `<img src="images/${image}" alt="${event.title}" class="event-poster">`).join('')}
+                </div>
+                <button class="register-btn" onclick="window.location.href='register.html'">Register Now</button>
+            `;
+        } else {
+            document.getElementById('event-details-container').innerHTML = '<p>Event not found.</p>';
+        }
+    </script>
+
+</body>
+
+</html>

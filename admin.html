@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - NCW Event Organizer</title>
+    <link rel="stylesheet" href="styles/admin.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="admin-container">
+        <header>
+            <h1>Event Management - Admin Panel</h1>
+            <button id="logoutBtn">Logout</button>
+        </header>
+        
+        <section class="add-event-form">
+            <h2>Add New Event</h2>
+            <form id="addEventForm">
+                <label for="eventTitle">Event Title</label>
+                <input type="text" id="eventTitle" required>
+
+                <label for="eventDate">Date & Time</label>
+                <input type="datetime-local" id="eventDate" required>
+
+                <label for="eventVenue">Venue</label>
+                <input type="text" id="eventVenue" required>
+
+                <label for="eventCompetitions">Competitions</label>
+                <textarea id="eventCompetitions" placeholder="Group & Individual" required></textarea>
+
+                <label for="eventPrizes">Prizes</label>
+                <textarea id="eventPrizes" required></textarea>
+
+                <label for="eventOrganizers">Organizer Names</label>
+                <input type="text" id="eventOrganizers" required>
+
+                <!-- Removed event poster input -->
+                <button type="submit">Add Event</button>
+            </form>
+        </section>
+
+        <section class="manage-events">
+            <h2>Manage Events</h2>
+            <table id="eventsTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date & Time</th>
+                        <th>Venue</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="eventsTableBody">
+                    <!-- Events will be displayed here dynamically -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- Firebase and custom scripts with type="module" -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCW Event Organizer - Signup</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+    <!-- Firebase Scripts -->
+    <script type="module" src="firebase/firebase-config.js"></script>
+    <script type="module" src="js/auth.js"></script>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/logo2.jpg" alt="NCW Event Organizer Logo">
+            <span>NCW Event Organizer</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+    </nav>
+
+    <!-- Signup Form Container -->
+    <div class="signup-container">
+        <h2><i class="fas fa-user-plus"></i> Join NCW Events</h2>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+
+        <form id="signup-form">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="fullName" placeholder="Full Name" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn-animate">Sign Up</button>
+        </form>
+
+        <p id="signup-message" class="error-message"></p>
+    </div>
+
+    <!-- Signup Logic -->
+    <script type="module">
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { app } from "./firebase/firebase-config.js";
+    
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+    
+        document.getElementById("signup-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById("fullName").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const message = document.getElementById("signup-message");
+    
+            if (!fullName || !email || !password) {
+                message.innerText = "All fields are required.";
+                return;
+            }
+    
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+    
+                const role = email === "admin@example.com" ? "admin" : "user";
+    
+                await setDoc(doc(db, "users", user.uid), {
+                    fullName: fullName,
+                    email: email,
+                    role: role
+                });
+    
+                alert("Signup successful! Redirecting...");
+                window.location.href = role === "admin" ? "admin.html" : "home.html";
+    
+            } catch (error) {
+                console.error("Signup error:", error);
+                message.innerText = error.message;
+            }
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration - NCW Event Organizer</title>
+    <link rel="stylesheet" href="styles/register.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/logo2.jpg" alt="Event Logo">
+            <span>NCW Event Organizer</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> Events Calendar</a></li>
+            <li><a href="event-details.html"><i class="fas fa-info-circle"></i> Event Details</a></li>
+        </ul>
+    </nav>
+
+    <div class="registration-container">
+        <h2><i class="fas fa-user-plus"></i> Register for Tech Fest 2025</h2>
+
+        <label class="student-label"> <i class="fas fa-user-graduate"></i> Are you a student of Nirmala College for Women?</label>
+        <select id="student-type" class="dropdown">
+            <option value="ncw">Yes, I am from NCW</option>
+            <option value="other">No, I am from another college</option>
+        </select>
+
+        <form id="ncw-student-form" class="form-container">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="text" id="department" placeholder="Department" required>
+            <input type="text" id="participation-type" placeholder="Participation Type (Team/Individual)" required>
+            <input type="text" id="event-participation" placeholder="Which Participation (Dancing, Singing, etc.)" required>
+            <input type="text" id="event-title" placeholder="Event Title" required>
+            <button type="submit" class="register-btn">Register <i class="fas fa-arrow-right"></i></button>
+        </form>
+
+        <form id="other-student-form" class="form-container" style="display: none;">
+            <input type="text" id="other-name" placeholder="Full Name" required>
+            <input type="text" id="other-college-name" placeholder="College Name" required>
+            <input type="text" id="other-location" placeholder="Location" required>
+            <input type="text" id="other-participation-type" placeholder="Participation Type (Team/Individual)" required>
+            <input type="text" id="other-event-participation" placeholder="Which Participation (Dancing, Singing, etc.)" required>
+            <input type="text" id="other-event-title" placeholder="Event Title" required>
+            <input type="email" id="other-email" placeholder="Email" required>
+            <button type="submit" class="register-btn">Register <i class="fas fa-arrow-right"></i></button>
+        </form>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the necessary Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
+
+        // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAExRnlQu3WEd41hd44VyvmkQAAY4Uon0E",
+        authDomain: "ncw-events-organizer.firebaseapp.com",
+        projectId: "ncw-events-organizer",
+        storageBucket: "ncw-events-organizer.appspot.com",
+        messagingSenderId: "881699396168",
+        appId: "1:881699396168:web:b0e933daa7856554e6167d"
+    };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Listen for changes in the student-type dropdown
+        document.getElementById('student-type').addEventListener('change', function() {
+            if (this.value === 'ncw') {
+                document.getElementById('ncw-student-form').style.display = 'block';
+                document.getElementById('other-student-form').style.display = 'none';
+            } else {
+                document.getElementById('ncw-student-form').style.display = 'none';
+                document.getElementById('other-student-form').style.display = 'block';
+            }
+        });
+
+        // NCW student form submission
+        document.getElementById('ncw-student-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const department = document.getElementById('department').value;
+            const participationType = document.getElementById('participation-type').value;
+            const eventParticipation = document.getElementById('event-participation').value;
+            const eventTitle = document.getElementById('event-title').value;
+
+            try {
+                await addDoc(collection(db, 'registrations'), {
+                    name,
+                    department,
+                    participationType,
+                    eventParticipation,
+                    eventTitle,
+                    college: 'NCW',
+                });
+                alert("Registration successful!");
+                document.getElementById('ncw-student-form').reset();
+            } catch (error) {
+                alert("Error registering: " + error.message);
+            }
+        });
+
+        // Other college student form submission
+        document.getElementById('other-student-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('other-name').value;
+            const collegeName = document.getElementById('other-college-name').value;
+            const location = document.getElementById('other-location').value;
+            const participationType = document.getElementById('other-participation-type').value;
+            const eventParticipation = document.getElementById('other-event-participation').value;
+            const eventTitle = document.getElementById('other-event-title').value;
+            const email = document.getElementById('other-email').value;
+
+            try {
+                await addDoc(collection(db, 'registrations'), {
+                    name,
+                    collegeName,
+                    location,
+                    participationType,
+                    eventParticipation,
+                    eventTitle,
+                    email,
+                });
+                alert("Registration successful!");
+                document.getElementById('other-student-form').reset();
+            } catch (error) {
+                alert("Error registering: " + error.message);
+            }
+        });
+    </script>
+
+</body>
+</html>

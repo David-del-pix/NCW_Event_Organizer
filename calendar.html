@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Calendar - NCW Event Organizer</title>
+    <link rel="stylesheet" href="styles/calendar.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/logo2.jpg" alt="Event Logo">
+            <span>NCW Event Organizer</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> Events Calendar</a></li>
+            <li><a href="event-details.html"><i class="fas fa-info-circle"></i> Event Details</a></li>
+        </ul>
+    </nav>
+
+    <div class="calendar-container">
+        <h2><i class="fas fa-calendar-alt"></i> Events Calendar</h2>
+        <div id="calendar"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                events: [
+                    {
+                        title: 'Tech Fest 2025',
+                        start: '2025-03-01T09:00:00',
+                        url: 'event-details.html?event=tech-fest-2025'
+                    },
+                    {
+                        title: 'Cultural Night',
+                        start: '2025-03-15T18:00:00',
+                        url: 'event-details.html?event=cultural-night'
+                    },
+                    {
+                        title: 'Dance Competition',
+                        start: '2025-03-20T10:00:00',
+                        url: 'event-details.html?event=dance-competition'
+                    },
+                    {
+                        title: 'Singing Contest',
+                        start: '2025-03-25T14:00:00',
+                        url: 'event-details.html?event=singing-contest'
+                    },
+                    {
+                        title: 'Sports Day',
+                        start: '2025-04-05T08:00:00',
+                        url: 'event-details.html?event=sports-day'
+                    }
+                ]
+            });
+        });
+    </script>
+
+</body>
+
+</html>

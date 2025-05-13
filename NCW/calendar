@@ -1,0 +1,25 @@
+document.addEventListener('DOMContentLoaded', function() {
+   let calendarEl = document.getElementById('calendar');
+   let calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+            
+      events: [
+            {
+                "id": 1,
+                "title": "First Line<br>Second Line",
+                "start": "2022-06-04",
+                "end": null,
+                "allDay": true,
+                "editable": true,
+                "className": "badge-soft-warning",
+           
+            }
+        ],
+
+      eventContent: function( info ) {
+          return {html: info.event.title};
+      }
+
+    });
+    calendar.render();
+})

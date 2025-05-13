@@ -1,0 +1,140 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #00aeff, #2a2a72);
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.admin-container {
+    width: 90%;
+    max-width: 1100px;
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.2);
+    transition: 0.3s ease-in-out;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: linear-gradient(120deg, #00aeff, #ff2e63);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+header h1 {
+    font-size: 1.8rem;
+}
+
+/* Logout Button */
+#logoutBtn {
+    background: linear-gradient(120deg, #ff2e63, #ff8c00);
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#logoutBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px rgba(255, 46, 99, 0.8);
+}
+
+/* Form Styling */
+.add-event-form {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.add-event-form h2 {
+    text-align: center;
+    background: linear-gradient(90deg, #ff8c00, #ff2e63);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    background: linear-gradient(120deg, #ff8c00, #ff2e63);
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px rgba(255, 46, 99, 0.8);
+}
+
+/* Table Styling */
+.manage-events {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.manage-events table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.manage-events th, .manage-events td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.manage-events th {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .admin-container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+}

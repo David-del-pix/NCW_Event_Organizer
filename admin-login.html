@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCW Event Organizer - Login</title>
+    
+    <link rel="stylesheet" href="styles/login.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-box">
+            <h2>This is for Admin login Only</h2>
+            <p>  </p>
+
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn">Login <i class="fas fa-sign-in-alt"></i></button>
+            </form>
+            <a href="reset-password.html" class="forgot-password">Forgot Password?</a>
+        </div>
+    </div>
+
+    <!-- Import Firebase Configuration -->
+    <script type="module">
+        import { auth, signInWithEmailAndPassword } from '../firebase/firebase-config.js';
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("Login successful! Redirecting to Admin Panel...");
+                    window.location.href = "admin.html";
+                })
+                .catch((error) => {
+                    alert("Invalid email or password. Please try again.");
+                });
+        });
+    </script>
+</body>
+</html>
